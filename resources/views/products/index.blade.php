@@ -30,7 +30,7 @@
 
             <h3>Add new product</h3>
             <p>&nbsp;</p>
-            <form action="{{route('index')}}" method="post" class="contact-form">
+            <form id="productForm" action="#" method="post" class="contact-form">
                 <div class="form-group">
                     <label>Product name</label>
                     <input type="text" name="name" placeholder="Enter product name" />
@@ -77,4 +77,20 @@
                 @endforeach
             </table>
         </div>
+@stop
+
+@section('javascript')
+<script>
+    $(document).ready(function() {
+        $('#productForm').submit(function(e) {
+            e.preventDefault()
+            $.ajax({
+                url: "{{route('createProduct')}}",
+                data: $('#productForm').serialize()
+            }).done(function(result) {
+                window.location.host= window.location.host
+            });
+        });
+    })
+</script>
 @stop

@@ -13,3 +13,5 @@
 
 Route::any('/', ['as' => 'index', 'uses' => 'ProductsController@index']);
 
+Route::any('/createProduct', ['as' => 'createProduct', 'uses' => 'ProductsController@createProduct']);
+
