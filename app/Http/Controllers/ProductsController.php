@@ -25,7 +25,7 @@ class ProductsController extends Controller
         $formValidation = \Validator::make($request->only(array_keys($validationRules)), $validationRules);
 
         if ($formValidation->fails()) {
-            return redirect()->route('index')->with('errors', $formValidation->errors()->all())->withInput();
+            return json_encode(array('status' => false, 'messages' => $formValidation->errors()->all()));
         } else {
             $product = new \App\product();
             $product->setName($request->get('name'))
@@ -33,7 +33,7 @@ class ProductsController extends Controller
                     ->setPrice($request->get('price'));
             $product->save();
 
-            return json_encode(array('success', 'messages' => ['product added successfully']));
+            return json_encode(array('status' => true, 'messages' => ['product added successfully']));
         }
             
     }
